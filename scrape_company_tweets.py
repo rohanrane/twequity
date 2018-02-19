@@ -37,6 +37,7 @@ for date, handle, ID in itertools.izip(dates, handles, eventIDs):
 	print "Start Date:: ", start_date
 	print "End Date: ", end_date
 
+<<<<<<< HEAD
 	tweetCriteria = got.manager.TweetCriteria().setUsername(handle).setSince(start_date).setUntil(end_date)
 	tweets = got.manager.TweetManager.getTweets(tweetCriteria)
 
@@ -48,3 +49,16 @@ for date, handle, ID in itertools.izip(dates, handles, eventIDs):
 	        for t in tweets:
 	        	row = t.date, t.text, t.retweets, t.favorites, t.mentions, t.hashtags
 	        	writer.writerow([unicode(s).encode("utf-8") for s in row])
+=======
+	# tweetCriteria = got.manager.TweetCriteria().setUsername(handle).setSince(start_date).setUntil(end_date)
+	# tweets = got.manager.TweetManager.getTweets(tweetCriteria)
+
+	# print "Total Tweets: ", len(tweets)
+	# filename = str(ID) + "_" + handle + ".csv"
+
+	# with open(filename, "w") as output:
+	#         writer = csv.writer(output, delimiter=',')
+	#         for t in tweets:
+	#         	row = t.date, t.text, t.retweets, t.favorites, t.mentions, t.hashtags
+	#         	writer.writerow([unicode(s).encode("utf-8") for s in row])
+>>>>>>> c5a738fefb2e28cbb475d6f5013b961b9730b02b
