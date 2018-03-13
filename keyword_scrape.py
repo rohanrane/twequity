@@ -55,17 +55,22 @@ for date, handle, ID in itertools.izip(dates, handles, eventIDs):
 		tweets = tweets + got.manager.TweetManager.getTweets(keywordCriteria)
 
 	
-	print "Total Tweets(before dup removal): ", len(tweets)
-	noDupTweets = tweets
-	# Hopefully this isn't too expensive
-	# temp_set = set(map(tuple,tweets))
-	# noDupTweets = map(list,temp_set)
+	print "Total Tweets(with duplicates): ", len(tweets)
 
-	print "Total Tweets: ", len(noDupTweets)
+	# Get rid of duplicate tweets
+	# Hopefully this isn't too expensive
+	ids = set()
+	noDupTweets = []
+	for tweet in tweets:
+		if not tweet.id in ids:
+			ids.add(tweet.id)
+			noDupTweets.append(tweet)
+
+	print "Total Tweets(without duplicates): ", len(noDupTweets)
 	filename = str(ID) + "_" + handle + "_keywords" + ".csv"
 
 	with open(filename, "w") as output:
 	        writer = csv.writer(output, delimiter=',')
 	        for t in noDupTweets:
-	        	row = t.date, t.text, t.retweets, t.favorites, t.mentions, t.hashtags
+	        	row = t.date, t.text, t.retweets, t.favorites, t.mentions, t.hashtags, t.id
 	        	writer.writerow([unicode(s).encode("utf-8") for s in row])
