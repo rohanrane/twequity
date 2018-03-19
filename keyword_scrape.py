@@ -49,6 +49,9 @@ for date, handle, ID in itertools.izip(dates, handles, eventIDs):
 
 	tweetCriteria = got.manager.TweetCriteria().setUsername(handle).setSince(start_date).setUntil(end_date)
 
+	#reset tweet list for each company
+	tweets = []
+
 	#loop through keywords and scrape the tweets
 	for keyword in keywords:
 		keywordCriteria = tweetCriteria.setQuerySearch(keyword)
