@@ -91,7 +91,7 @@ for date, handle, ID, name in itertools.izip(dates, handles, eventIDs, names):
 				ids.add(tweet.id)
 				noDupTweets.append(tweet)
 
-	print "Total Tweets: ", len(noDuptweets)
+	print "Total Tweets: ", len(noDupTweets)
 	filename = str(ID) + "_" + handle + "_keywords" + ".csv"
 
 	with open(filename, "w") as output:
