@@ -37,7 +37,8 @@ for fname in glob.glob(path):
 					bio = bioTag.text.encode('utf-8') 
 					followersTag = soup.find('a', {'data-nav':'followers'})
 					followingTag = soup.find('a', {'data-nav':'following'})
-					print row[6]
+					verifiedTag = soup.find('span', {'class':'ProfileHeaderCard-badges'})
+	
 					try:
 						following = followingTag['title'].split(' ')[0]
 					except TypeError:
@@ -46,9 +47,13 @@ for fname in glob.glob(path):
 						followers = followersTag['title'].split(' ')[0]
 					except TypeError:
 						followers = 0
+
+					verified = 1
+					if (verifiedTag is None):
+						verified = 0
 					
 					writer = csv.writer(output, delimiter=',')
-					r = row[0], row[1], row[2], row[3], row[4], row[5], row[6], username, bio, following, followers
+					r = row[0], row[1], row[2], row[3], row[4], row[5], row[6], username, bio, following, followers, verified
 					writer.writerow([s for s in r])
 		os.rename('temp.csv', fname)
 print '- - Finished - -'
