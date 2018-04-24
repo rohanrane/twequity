@@ -42,18 +42,21 @@ for fname in glob.glob(path):
 						page = requests.get(url)
 						soup = bs4.BeautifulSoup(page.text, 'html.parser')
 						bioTag = soup.find('p', {'class':'ProfileHeaderCard-bio u-dir'})
-						bio = bioTag.text.encode('utf-8') 
+						try:
+							bio = bioTag.text.encode('utf-8') 
+						except AttributeError:
+							bio = ''
 						followersTag = soup.find('a', {'data-nav':'followers'})
 						followingTag = soup.find('a', {'data-nav':'following'})
 						verifiedTag = soup.find('span', {'class':'ProfileHeaderCard-badges'})
 		
 						try:
 							following = followingTag['title'].split(' ')[0]
-						except TypeError:
+						except TypeError, AttributeError:
 							following = 0
 						try:
 							followers = followersTag['title'].split(' ')[0]
-						except TypeError:
+						except TypeError, AttributeError:
 							followers = 0
 
 						verified = 1
